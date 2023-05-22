@@ -1,0 +1,27 @@
+1) python3 -m django startproject smartnotes .
+2) python3 manage.py runserver
+3) python3 -m django startapp home
+    add the new appa in the settings.py of the main app (smartnotes)
+
+### Database
+4) database -> python3 manage.py migrate
+5) create admin user -> python3 manage.py createsuperuser
+6) Creating migration -> python3 manage.py makemigrations
+then -> python3 manage.py migrate
+7) python3 manage.py shell
+    from notes.models import Notes
+    mynote = Notes.objects.get(pk='1') # Notes.object is the main way if accessing data from the notes in the database.
+                                       # The .get() method will search for one object whicj the pk =1 and returns it
+    mynote.title
+    mynote.text
+    Notes.objects.all()
+
+    # creating new node
+    new_note = Notes.objects.create(title="A second note", text="This is a second note")
+    Notes.objects.all()
+
+    # Quering/filtering
+    Notes.objects.filter(title__startswith="My")
+    Notes.objects.filter(text__icontains="Django")
+    Notes.objects.exclude(text__icontains="Django")
+    Notes.objects.filter(text__icontains="Django").exclude(title__icontains="Django")
